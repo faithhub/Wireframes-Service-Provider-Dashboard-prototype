@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <title>Wireframes Service Provider Dashboard Prototype</title>
+    <title>Wireframes End User Dashboard Prototype</title>
 
     <!-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.svg"> -->
 
@@ -20,20 +20,30 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <style>
-    .access {
+    /* HIDE RADIO */
+    [type=radio] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* IMAGE STYLES */
+    [type=radio]+img {
         cursor: pointer;
     }
 
-    .access:hover {
-        border: 5px solid black;
-        border-radius: 10px;
-        border-color: #323584;
+    /* CHECKED STYLES */
+    [type=radio]:checked+img {
+        outline: 5px solid #04AA6D;
+        padding: 20px;
+        border-radius: 5px;
     }
 
-    .myactive {
-        border: 5px solid black;
-        border-radius: 10px;
-        border-color: #323584;
+    [type=radio]:hover+img {
+        outline: 5px solid #04AA6D;
+        padding: 20px;
+        border-radius: 5px;
     }
 </style>
 
@@ -91,52 +101,50 @@
 
 
         <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner">
+            <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="menu-title"> <span></span>
                         </li>
-                        <li> <a href="index.html"><i class="feather-home"></i>
+                        <li>
+                            <a href="index.html"><i class="feather-home"></i>
+                                <span class="shape1"></span><span class="shape2"></span>
                                 <span>Dashboard</span></a>
                         </li>
 
-                        <li>
-                            <a href="./knowledge.html"><i class="feather-lock"></i>
-                                <span> Knowledge</span></a>
+                        <li class="submenu active">
+                            <a href="#"><i class="feather-lock"></i>
+                                <span class="shape1"></span><span class="shape2"></span>
+                                <span> Security</span> <span class="menu-arrow"></span>
+                            </a>
+                            <ul style="display: none;">
+                                <li><a href="./2fa.html">Enable 2fa</a></li>
+                                <li><a href="./grant-access.html">Grant Company</a></li>
+                                <li><a class="active" href="./revoke-access.html">Revoke Company</a></li>
+                            </ul>
                         </li>
 
                         <li class="submenu">
-                            <a href="#">
-                                <i class="feather-user-plus"></i> <span> Profile</span> <span
+                            <a href="#"><i class="feather-user-plus"></i> <span> Profile</span> <span
                                     class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="./profile.html">Personal Info</a></li>
                                 <li><a href="./change-password.html">Change Password</a></li>
-                                <li><a href="./notification.html">Communication Preference</a></li>
+                                <li><a href="./notification.html">Notification Mgt</a></li>
                             </ul>
                         </li>
+
+                        <!-- <li>
+                            <a href="#">
+                                <i class="feather-lock"></i>
+                                <span> Security</span>
+                            </a>
+                        </li> -->
 
                         <li>
                             <a href="./history.html">
                                 <i class="feather-bar-chart"></i>
                                 <span>History</span></a>
-                        </li>
-
-                        <li>
-                            <a href="./api.html"><i class="feather-lock"></i>
-                                <span> API</span></a>
-                        </li>
-
-
-                        <li class="submenu active">
-                            <a href="#"><i class="feather-user"></i>
-                                <span class="shape1"></span><span class="shape2"></span>
-                                <span> Account Mgt</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="./user-mgt.html">User Mgt</a></li>
-                                <li><a class="active" href="./payment-mgt.html">Payment Mgt</a></li>
-                                <li><a href="./revoke-access.html">Report</a></li>
-                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -152,75 +160,45 @@
                             <div class="d-flex align-items-center">
                                 <h5 class="page-title"><a href="index.html">Dashboard</a></h5>
                                 <li class="breadcrumb-item"><i class="fas fa-home"></i></li>
-                                <li class="breadcrumb-item"><a href="index.html">Account Management</a></li>
-                                <li class="breadcrumb-item active"> Payment Management</li>
+                                <li class="breadcrumb-item"><a href="index.html">Security</a></li>
+                                <li class="breadcrumb-item active"> Revoke Access</li>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title float-left">Balance due</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p>Your balance due is $0.00</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="text-right mr-4">
-                                            <button class="btn btn-rounded btn-light pr-4 pl-4">Pay Now</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <form method="post">
+                    <div class="text-right mt-2 mb-4">
+                        <button class="btn btn-primary" type="submit" name="submit">Generate Code</button>
+                    </div>
+                    <div class="row container-fluid">
+                        <div class="col-12 col-md-4 col-lg-3 d-flex flex-wrap p-2">
+                            <label>
+                                <input type="radio" name="test" value="big">
+                                <img src="assets/img/svg/Salesforce.com_logo.svg" class="img-fluid"
+                                    style="height: 150px;">
+                            </label>
                         </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-md-7 mb-3">
-                                        <h4 class="card-title">Management Billing Methods</h4>
-                                        <p class="card-text">Add, update or remove your billing methods</p>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="float-right">
-                                            <button
-                                                class="btn btn-rounded btn-light text-success bg-white pr-4 pl-4">Add a
-                                                New Billing Method</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h5>Primary</h5>
-                                        <p>Your Primary billing method is used for all recurring payments </p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12" style="display: flex;">
-                                        <img src="assets/img/svg/icons8-mastercard-logo.svg">
-                                        <div class="p-3">
-                                            <h5>MasterCard Ending with 6455</h5>
-                                            <p>You need a primary billing method when you have active contract or
-                                                balance
-                                                due. To remove this one, set a new primary billing method first.</p>
-                                        </div>
-                                        <h5 class="float-right p-3">CAD</h5>
-                                    </div>
-                                </div>
-                                <div class="float-right">
-                                    <button class="btn btn-default text-success">Edit</button>
-                                </div>
-                            </div>
+                        <div class="col-12 col-md-4 col-lg-3 d-flex flex-wrap p-2">
+                            <label>
+                                <input type="radio" name="test" value="big">
+                                <img src="assets/img/svg/Bell_logo.svg" alt="" class="img-fluid" style="height: 150px">
+                            </label>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3 d-flex flex-wrap p-2">
+                            <label>
+                                <input type="radio" name="test" value="big">
+                                <img src="assets/img/svg/quebec-vector-logo.svg" alt="" class="img-fluid"
+                                    style="height: 150px">
+                            </label>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3 d-flex flex-wrap p-2">
+                            <label>
+                                <input type="radio" name="test" value="big">
+                                <img src="assets/img/svg/derjaslin.svg" alt="" class="img-fluid" style="height: 150px">
+                            </label>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
         </div>
