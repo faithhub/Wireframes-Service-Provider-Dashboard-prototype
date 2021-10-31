@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="assets/css/feather.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
+
+
+    <link rel="stylesheet" type="text/css" media="all" href="./assets/daterange/daterangepicker.css" />
+
 </head>
 <style>
     .access {
@@ -135,7 +139,7 @@
                             <ul style="display: none;">
                                 <li><a href="./user-mgt.html">User Mgt</a></li>
                                 <li><a href="./payment-mgt.html">Payment Mgt</a></li>
-                                <li><a class="active" href="./report.html">Report</a></li>
+                                <li><a  class="active" href="./report.html">Report</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -187,14 +191,32 @@
                                         <h4 class="card-title float-left">Statement Period</h4>
                                     </div>
                                 </div>
-                                <div class="row">                                    
-                                    <div class="col-md-6">
-                                        <input type="date" class="form-control" name="daterange" id="daterange">
-                                        <strong>Filter</strong>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="float-left d-flex">
+                                            <!-- <input type="date" class="form-control" name="daterange" id="daterange"> -->
+                                            <!-- <input type="text" id="config-demo" class="form-control" style=""> -->
+                                            <div id="config-demo"
+                                                style="background: #fff; cursor: pointer; padding: 10px; border: 1px solid #ccc; width: 150%; border-radius: 5px;">
+                                                <span id="config-demo-span" class="pr-3 pl-3"></span>
+                                                &nbsp;
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <div class="d-flex ml-3" style="margin: auto;">
+                                                <img src="https://img.icons8.com/color/48/000000/sorting-options.png" style="height: 20px;">
+                                                <strong class="text-success h6 pl-3"  style="margin: auto; cursor: pointer;">Filters</strong>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 float-right">
-                                        <button class="btn btn-light btn-rounded text-success">Download CSV</button>
-                                        <button class="btn btn-light btn-rounded text-success">Download CSV</button>
+                                    <div class="col-md-6">
+                                        <div class="float-right">
+                                            <button
+                                                class="btn btn-light btn-rounded text-success py-2 pr-5 pl-5 mb-3">Download
+                                                CSV</button>
+                                            <button
+                                                class="btn btn-light btn-rounded text-white btn-primary py-2 pr-5 pl-5 mb-sm-3">Download
+                                                Invoices</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -219,7 +241,32 @@
                                                         <td>Refund</td>
                                                         <td></td>
                                                         <td>$230.00<br> $230.00</td>
-                                                        <td>462675761</td>
+                                                        <td class="text-success">416514030</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 16, 2021</td>
+                                                        <td>Processing Fee</td>
+                                                        <td>Payment processing fee for for Ref ID 413357989</td>
+                                                        <td></td>
+                                                        <td>$0.90<br> $0.00</td>
+                                                        <td class="text-success">413357990</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 16, 2021</td>
+                                                        <td>Payment</td>
+                                                        <td>Paid from MasterCard 6455</td>
+                                                        <td></td>
+                                                        <td>$30.90<br> $0.90</td>
+                                                        <td class="text-success">423357989</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 15, 2021</td>
+                                                        <td>Bonus</td>
+                                                        <td>Bonus Milestone 3: Milestone 3:Integration with marketing
+                                                            email including registration</td>
+                                                        <td>Glory Benson</td>
+                                                        <td>$30.00<br> $30.00</td>
+                                                        <td class="text-success">413241336</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -273,22 +320,39 @@
 
     <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <script src="assets/plugins/apexchart/apexcharts.min.js"></script>
-    <script src="assets/plugins/apexchart/dsh-apaxcharts.js"></script>
 
-    <script src="assets/plugins/simple-calendar/jquery.simple-calendar.js"></script>
-    <script src="assets/js/calander.js"></script>
+
+    <link rel="stylesheet" type="text/css" media="all" href="./assets/daterange/daterangepicker.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+
+    <script type="text/javascript" src="./assets/daterange/daterangepicker.js"></script>
+
 
     <script src="assets/js/script.js"></script>
-    <script>
+    <script type="text/javascript">
         $('.myradio').click(function () {
             $('.myradio').removeClass('myactive');
             $(this).addClass('myactive');
         });
-            // $('.myradio').click(function(){
-            //     $('.myradio').removeClass('myactive');
-            //     $(this).addClass('myactive');
-            // });
+
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            $('#config-demo-span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+        $('#config-demo').daterangepicker({
+            timePicker: true,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour').add(32, 'hour'),
+            locale: {
+                format: 'MMMM D, YYYY'
+            }
+        });
+        cb(start, end);
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </body>
