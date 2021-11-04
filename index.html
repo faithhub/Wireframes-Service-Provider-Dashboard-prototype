@@ -136,33 +136,33 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control text-center" placeholder="Enter Code">
+                                        <input type="text" id="myInput" class="form-control text-center" placeholder="Enter Code">
                                     </div>
                                     <div class="col-md-12 text-center mt-2 mb-2">
-                                        <button class="btn btn-primary pr-3 pl-3" type="submit"
-                                            name="submit">Validate</button>
-                                    </div>
-                                    <div class="table-responsive mt-4">
+                                        <button class="btn btn-primary pr-3 pl-3" onclick="validate()"
+                                            type="button">Validate</button>
+                                    </div>                                    
+                                    <div class="table-responsive mt-4" id="tableDetails" style="display: none;">
                                         <table class="table mb-0">
                                             <tbody>
                                                 <tr>
-                                                    <td>Title:</td>
+                                                    <td width="20%">Title:</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Name:</td>
+                                                    <td width="20%">Name:</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Email:</td>
+                                                    <td width="20%">Email:</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Mobile Number:</td>
+                                                    <td width="20%">Mobile Number:</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Address:</td>
+                                                    <td width="20%">Address:</td>
                                                     <td></td>
                                                 </tr>
                                             </tbody>
@@ -284,10 +284,16 @@
             $('.myradio').removeClass('myactive');
             $(this).addClass('myactive');
         });
-            // $('.myradio').click(function(){
-            //     $('.myradio').removeClass('myactive');
-            //     $(this).addClass('myactive');
-            // });
+        function validate(){            
+            var code = document.getElementById("myInput").value;
+            var element = document.getElementById('tableDetails');
+            if(code != ''){
+                element.style.display = 'block'; 
+            }else{
+                element.style.display = 'none'; 
+                alert("Please Input code")
+            }
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </body>
